@@ -1,0 +1,101 @@
+@import 'fontsource-open-sans/index.css';
+@import 'fontsource-lora/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-text antialiased leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+
+  ::selection {
+    @apply bg-secondary/20 text-text;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-accent text-white font-sans font-semibold rounded-lg transition-all duration-200 hover:bg-accent-dark hover:shadow-lg active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-secondary text-white font-sans font-semibold rounded-lg transition-all duration-200 hover:opacity-90 hover:shadow-lg active:scale-[0.98];
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-text font-sans font-semibold rounded-lg border border-gray-200 transition-all duration-200 hover:border-accent hover:text-accent hover:shadow-md active:scale-[0.98];
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full;
+  }
+
+  .eyebrow-secondary {
+    @apply eyebrow bg-secondary/10 text-secondary;
+  }
+
+  .eyebrow-accent {
+    @apply eyebrow bg-accent/10 text-accent;
+  }
+
+  .eyebrow::before {
+    content: '';
+    @apply w-1.5 h-1.5 rounded-full bg-current;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-text leading-tight tracking-tight;
+  }
+
+  .section-lead {
+    @apply text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl mx-auto;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 shadow-sm transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-xl hover:-translate-y-1 hover:border-gray-200;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

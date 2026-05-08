@@ -1,0 +1,116 @@
+---
+import { getWhatsAppUrlContextual } from '../../data/siteConfig';
+
+const features = [
+  'Equipo de kinesiólogos matriculados',
+  'Planes de tratamiento personalizados',
+  'Educación continua al paciente',
+  'Seguimiento integral durante la recuperación',
+];
+---
+
+<section id="nosotros" class="section-padding relative overflow-hidden">
+  <div
+    class="absolute top-1/3 -right-32 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container-custom relative">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div class="order-2 lg:order-1" data-reveal>
+        <span class="eyebrow-accent mb-5">Sobre nosotros</span>
+
+        <h2 class="section-title mb-6">
+          Más de una década cuidando tu
+          <span class="text-secondary">salud kinesiológica</span>
+        </h2>
+
+        <div class="space-y-4 text-text-secondary leading-relaxed">
+          <p>
+            Centro Médico Barraquero nació con el objetivo de brindar atención kinesiológica de
+            calidad en un ambiente cálido y profesional. Nuestro equipo de especialistas trabaja día
+            a día para ayudarte a recuperar tu bienestar.
+          </p>
+          <p>
+            Nos especializamos en rehabilitación física, kinesiología deportológica y tratamiento
+            de trastornos musculoesqueléticos. Cada paciente es único, por eso diseñamos planes de
+            tratamiento personalizados.
+          </p>
+        </div>
+
+        <ul class="mt-8 grid sm:grid-cols-2 gap-3">
+          {features.map((feature) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 w-5 h-5 rounded-full bg-secondary/15 flex items-center justify-center shrink-0">
+                <svg class="w-3 h-3 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                </svg>
+              </span>
+              <span class="text-sm text-text font-medium">{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={getWhatsAppUrlContextual('Hola! Me gustaría saber más sobre Centro Médico Barraquero.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
+            Consultá por un turno
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+          <a href="#galeria" class="btn-outline">
+            Ver instalaciones
+          </a>
+        </div>
+      </div>
+
+      <div class="order-1 lg:order-2" data-reveal>
+        <div class="relative">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-accent/20 rounded-3xl transform -rotate-3"
+            aria-hidden="true"
+          ></div>
+          <div class="relative bg-white rounded-3xl shadow-xl ring-1 ring-gray-100 overflow-hidden">
+            <!-- PLACEHOLDER: Imagen del equipo o instalaciones -->
+            <div class="aspect-[4/3] bg-gradient-to-br from-secondary/40 via-secondary/30 to-accent/40 flex items-center justify-center">
+              <div class="text-center p-8">
+                <svg
+                  class="w-20 h-20 text-white/80 mx-auto mb-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"/>
+                </svg>
+                <p class="text-white/90 text-sm font-semibold tracking-wide uppercase">Imagen del Centro</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-6 -right-6 hidden md:block bg-white rounded-2xl shadow-xl ring-1 ring-gray-100 p-5 max-w-[220px]">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-secondary to-secondary/70 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-2xl font-serif font-semibold text-text leading-none">+1.500</p>
+                <p class="text-xs text-text-secondary mt-1">Pacientes felices</p>
+              </div>
+            </div>
+            <p class="text-xs text-text-secondary leading-snug">
+              Atendidos con planes personalizados.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,49 @@
+---
+const labels = [
+  'Sala principal',
+  'Equipamiento',
+  'Recepción',
+  'Consultorio',
+  'Área de terapia',
+  'Espacio común',
+];
+---
+
+<section id="galeria" class="section-padding">
+  <div class="container-custom">
+    <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+      <span class="eyebrow-accent mb-4">Galería</span>
+      <h2 class="section-title mb-4">Conocé nuestras instalaciones</h2>
+      <p class="section-lead">
+        Espacios diseñados para brindarte la mejor atención y comodidad durante tu tratamiento.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+      {[1, 2, 3, 4, 5, 6].map((i) => (
+        <div
+          class={`group relative overflow-hidden rounded-2xl ring-1 ring-gray-100 ${i === 1 ? 'md:col-span-2 md:row-span-2' : ''}`}
+          data-reveal
+        >
+          <div
+            class={`${i === 1 ? 'aspect-[16/9] md:aspect-square' : 'aspect-square'} bg-gradient-to-br from-secondary/40 via-secondary/30 to-accent/40 flex items-center justify-center transition-transform duration-500 group-hover:scale-105`}
+          >
+            <div class="text-center p-4">
+              <svg class="w-12 h-12 text-white/70 mx-auto mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+              <p class="text-white/80 text-xs font-semibold tracking-wide uppercase">Imagen {i}</p>
+            </div>
+          </div>
+
+          <div
+            class="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            aria-hidden="true"
+          >
+            <p class="text-white text-sm font-semibold">{labels[i - 1]}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

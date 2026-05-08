@@ -1,23 +1,125 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/globals.css';
+import { siteConfig } from '../data/siteConfig';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import FloatingWhatsApp from '../components/layout/FloatingWhatsApp.astro';
+import BackToTop from '../components/layout/BackToTop.astro';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  image = '/og-image.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, siteConfig.url);
+
+const jsonLdLocalBusiness = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: siteConfig.name,
+  description: siteConfig.description,
+  url: siteConfig.url,
+  telephone: `+54 ${siteConfig.whatsapp.number}`,
+  email: siteConfig.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: siteConfig.address.street,
+    addressLocality: siteConfig.address.city,
+    addressRegion: siteConfig.address.province,
+    addressCountry: siteConfig.address.country,
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -32.8992812,
+    longitude: -68.8390081,
+  },
+  openingHoursSpecification: Object.entries(siteConfig.hours).map(([day, hours]) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: day.charAt(0).toUpperCase() + day.slice(1),
+    opens: hours.split(' - ')[0],
+    closes: hours.split(' - ')[1],
+  })),
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: siteConfig.rating.average,
+    reviewCount: siteConfig.rating.count,
+  },
+  sameAs: [siteConfig.social.instagram, siteConfig.social.facebook],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title} | {siteConfig.tagline}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <script is:inline define:vars={{ siteConfig }}>
+      window.siteConfig = siteConfig;
+    </script>
+
+    <script is:inline define:vars={{ jsonLdLocalBusiness }}>
+      window.jsonLdLocalBusiness = jsonLdLocalBusiness;
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Navbar />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <FloatingWhatsApp />
+
+    <BackToTop />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLdLocalBusiness)} />
+
+    <script>
+      if ('IntersectionObserver' in window) {
+        const reveal = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                reveal.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+        );
+        document.querySelectorAll('[data-reveal]').forEach((el) => reveal.observe(el));
+      } else {
+        document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>
